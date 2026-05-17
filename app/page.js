@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const imageCategories = {
   home: [
@@ -78,6 +79,18 @@ export default function Home() {
     // Browser requires user interaction before autoplay
     window.addEventListener("click", startMusic, {
       once: true,
+    });
+
+    // PRELOAD ALL IMAGES
+    const allImages = [
+      ...imageCategories.home,
+      ...imageCategories.photography,
+      ...imageCategories.filmPhotography,
+    ];
+
+    allImages.forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
     });
 
     return () => {
@@ -439,9 +452,15 @@ export default function Home() {
 
       <AnimatePresence>
         {spawnedImages.map((img) => (
-          <motion.img
+          <motion(Image)
             key={img.id}
             src={img.src}
+            alt="portfolio image"
+            width={240}
+            height={320}
+            quality={85}
+            priority={true}
+            unoptimized={false}
             initial={{
               opacity: 0,
               scale: 0.7,
@@ -477,7 +496,7 @@ export default function Home() {
                 setHoveredHomeType(null);
               }
             }}
-            className="absolute z-[20] w-[210px] md:w-[240px] object-cover select-none pointer-events-auto hover:z-[30]"
+            className="absolute z-[20] w-[210px] md:w-[240px] object-cover select-none pointer-events-auto hover:z-[30] will-change-transform will-change-opacity"
             draggable={false}
           />
         ))}
