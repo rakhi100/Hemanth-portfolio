@@ -33,7 +33,6 @@ const imageCategories = {
   ],
   filmPhotography: [
     "/film/1.jpg",
-    "/film/2.jpg",
     "/film/3.jpg",
     "/film/4.jpg",
     "/film/5.jpg",
