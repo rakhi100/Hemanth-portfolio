@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+const MotionImage = motion(Image);
 
 const imageCategories = {
   home: [
@@ -452,7 +453,7 @@ export default function Home() {
 
       <AnimatePresence>
         {spawnedImages.map((img) => (
-          <motion(Image)
+          <MotionImage
             key={img.id}
             src={img.src}
             alt="portfolio image"
