@@ -48,7 +48,7 @@ export default function Home() {
   const [spawnedImages, setSpawnedImages] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("home");
-  const [hoveredHomeType, setHoveredHomeType] = useState(null);
+  
   const imageIndex = useRef(0);
 
   const hoverSoundRef = useRef(null);
@@ -121,17 +121,11 @@ export default function Home() {
   const backgroundColors = {
     home: "#ffffff",
     photography: "#fff4ad",
-    filmPhotography: "#7f4f24",
+    filmPhotography: "#BDD3C2",
   };
 
   const dynamicBackgroundColor =
-    activeCategory === "home"
-      ? hoveredHomeType === "photography"
-        ? "#fff4ad"
-        : hoveredHomeType === "filmPhotography"
-        ? "#7f4f24"
-        : "#ffffff"
-      : backgroundColors[activeCategory];
+  backgroundColors[activeCategory];
 
   const handleClick = (e) => {
     setMenuOpen(false);
@@ -486,16 +480,7 @@ export default function Home() {
             whileHover={{
               scale: img.scale * 1.03,
             }}
-            onMouseEnter={() => {
-              if (activeCategory === "home") {
-                setHoveredHomeType(img.type);
-              }
-            }}
-            onMouseLeave={() => {
-              if (activeCategory === "home") {
-                setHoveredHomeType(null);
-              }
-            }}
+            
             className="absolute z-[20] w-[210px] md:w-[240px] object-cover select-none pointer-events-auto hover:z-[30] will-change-transform will-change-opacity"
             draggable={false}
           />
